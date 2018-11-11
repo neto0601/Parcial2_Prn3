@@ -35,8 +35,8 @@ public class FrmModeloParte implements Serializable{
 
     @Inject
     private ModeloFacade modeloFacade;
-    //@Inject
-    //private ParteFacade parteFacade;        
+    @Inject
+    private ParteFacade parteFacade;        
 
     Modelo modelo;
     TipoVehiculo tipoVehiculo;
@@ -58,12 +58,7 @@ public class FrmModeloParte implements Serializable{
         this.modelo=registro;
         tipoVehiculo = new TipoVehiculo();
         marca = new Marca();
-        listaModelo = new ArrayList();      
-        try {
-           listaModelo = modeloFacade.findAll(); 
-        } catch (Exception ex) {
-            this.listaModelo = Collections.EMPTY_LIST;
-        }
+        
         
         listaPartes = new ArrayList();      
         try {
@@ -79,7 +74,7 @@ public class FrmModeloParte implements Serializable{
         tipoVehiculo = new TipoVehiculo();
         marca = new Marca();
         this.crearTablaModelo();
-        //this.crearTablaParte();
+        this.crearTablaParte();
     }
     
     public List<Modelo> crearTablaModelo(){
@@ -91,14 +86,14 @@ public class FrmModeloParte implements Serializable{
         } return this.listaModelo;
     }
     
-    /*public List<Parte> crearTablaParte(){
+    public List<Parte> crearTablaParte(){
         listaPartes = new ArrayList();      
         try {
            listaPartes = parteFacade.findAll(); 
         } catch (Exception ex) {
             this.listaPartes = Collections.EMPTY_LIST;
         } return this.listaPartes;
-    }*/
+    }
 
     public List<Parte> getListaPartes() {
         return listaPartes;
@@ -140,6 +135,7 @@ public class FrmModeloParte implements Serializable{
         this.marca = marca;
     }
     
-    
+//<p:ajax event="tabChange" listener="#{frmModelo.tabChangeHandler}"/>
+                                    
     
 }
