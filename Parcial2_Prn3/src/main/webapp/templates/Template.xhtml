@@ -16,32 +16,18 @@
 
         <div id="top">
             <ui:insert name="top">
-                <h:form>
-            <p:panelGrid>
-                <p:dataTable value="#{frmModeloParte.listaModelo}" var="v">
-                    <p:column headerText="ID">
-                        <h:outputText value="#{v.idModelo}" /> 
-                        </p:column>
-                        <p:column headerText="MARCA">
-                            <h:outputText value="#{v.idMarca.nombre}" /> 
-                        </p:column>
-                        <p:column headerText="TIPO">
-                            <h:outputText value="#{v.idTipoVehiculo.nombre}" /> 
-                        </p:column>
-                        <p:column headerText="NOMBRE">
-                            <h:outputText value="#{v.nombre}" /> 
-                        </p:column>
-                        <p:column headerText="AÑO">
-                            <h:outputText value="#{v.anio}" /> 
-                        </p:column>                        
-                </p:dataTable>
-            </p:panelGrid>
-        </h:form>
+
             </ui:insert>
         </div>
 
         <div id="content" class="center_content">
             <ui:insert name="content">
+
+            </ui:insert>
+        </div>
+
+        <div id="bottom">
+            <ui:insert name="bottom">
                 <h:form>
                     <p:tabView>
                         <p:tab title="GENERALIDADES">
@@ -53,15 +39,11 @@
                             </p:panel> 
                         </p:tab>
                         <p:tab title="PARTES">
-                            
+
                         </p:tab>
                     </p:tabView>
-                </h:form>
+                </h:form>    
             </ui:insert>
-        </div>
-
-        <div id="bottom">
-            <ui:insert name="bottom">Bottom</ui:insert>
         </div>
 
     </h:body>

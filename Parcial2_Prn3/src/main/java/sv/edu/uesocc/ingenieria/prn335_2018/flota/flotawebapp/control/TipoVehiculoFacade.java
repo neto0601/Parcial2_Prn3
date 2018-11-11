@@ -15,7 +15,7 @@ import sv.edu.uesocc.ingenieria.prn335_2018.flota.datos.definicion.TipoVehiculo;
  * @author neto
  */
 @Stateless
-public class TipoVehiculoFacade extends AbstractFacade<TipoVehiculo> implements TipoVehiculoFacadeLocal {
+public class TipoVehiculoFacade extends AbstractFacade<TipoVehiculo> {
 
     @PersistenceContext(unitName = "flota_webapp")
     private EntityManager em;

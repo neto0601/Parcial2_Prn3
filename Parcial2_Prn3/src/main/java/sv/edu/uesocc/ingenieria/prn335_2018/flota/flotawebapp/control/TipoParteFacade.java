@@ -15,7 +15,7 @@ import sv.edu.uesocc.ingenieria.prn335_2018.flota.datos.definicion.TipoParte;
  * @author neto
  */
 @Stateless
-public class TipoParteFacade extends AbstractFacade<TipoParte> implements TipoParteFacadeLocal {
+public class TipoParteFacade extends AbstractFacade<TipoParte> {
 
     @PersistenceContext(unitName = "flota_webapp")
     private EntityManager em;

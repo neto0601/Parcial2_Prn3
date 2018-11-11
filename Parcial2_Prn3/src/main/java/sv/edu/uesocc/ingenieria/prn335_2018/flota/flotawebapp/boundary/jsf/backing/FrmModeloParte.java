@@ -9,16 +9,17 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 import sv.edu.uesocc.ingenieria.prn335_2018.flota.datos.definicion.Modelo;
 import sv.edu.uesocc.ingenieria.prn335_2018.flota.datos.definicion.Parte;
 import sv.edu.uesocc.ingenieria.prn335_2018.flota.flotawebapp.control.ModeloFacade;
-import sv.edu.uesocc.ingenieria.prn335_2018.flota.flotawebapp.control.ModeloFacadeLocal;
 import sv.edu.uesocc.ingenieria.prn335_2018.flota.flotawebapp.control.ModeloParteFacade;
 import sv.edu.uesocc.ingenieria.prn335_2018.flota.flotawebapp.control.ParteFacade;
-import sv.edu.uesocc.ingenieria.prn335_2018.flota.flotawebapp.control.ParteFacadeLocal;
+
 
 /**
  *
@@ -29,8 +30,8 @@ import sv.edu.uesocc.ingenieria.prn335_2018.flota.flotawebapp.control.ParteFacad
 @ViewScoped
 public class FrmModeloParte implements Serializable{
 
-    @EJB
-    private ModeloFacadeLocal modeloFacade;
+    @Inject
+    private ModeloFacade modeloFacade;     
 
     Modelo modelo = new Modelo();
     
@@ -47,13 +48,18 @@ public class FrmModeloParte implements Serializable{
         listaPartes = parteFacade.findAll();
     }
     
+    @PostConstruct
+    public void inicializar(){
+        this.crearTabla();
+    }
+    
     public List<Modelo> crearTabla(){
-        listaModelo = new ArrayList();
-        if(modeloFacade != null){
-            listaModelo = modeloFacade.findAll();
-            return listaModelo;
-        }
-        return this.listaModelo = Collections.EMPTY_LIST;
+        listaModelo = new ArrayList();      
+        try {
+           listaModelo = modeloFacade.findAll(); 
+        } catch (Exception ex) {
+            this.listaModelo = Collections.EMPTY_LIST;
+        } return this.listaModelo;
     }
 
     public List<Parte> getListaPartes() {

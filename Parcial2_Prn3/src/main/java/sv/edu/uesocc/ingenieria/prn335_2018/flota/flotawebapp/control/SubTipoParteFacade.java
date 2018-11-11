@@ -15,7 +15,7 @@ import sv.edu.uesocc.ingenieria.prn335_2018.flota.datos.definicion.SubTipoParte;
  * @author neto
  */
 @Stateless
-public class SubTipoParteFacade extends AbstractFacade<SubTipoParte> implements SubTipoParteFacadeLocal {
+public class SubTipoParteFacade extends AbstractFacade<SubTipoParte> {
 
     @PersistenceContext(unitName = "flota_webapp")
     private EntityManager em;
