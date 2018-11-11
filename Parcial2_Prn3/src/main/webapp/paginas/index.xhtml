@@ -13,8 +13,8 @@
             <ui:define name="top">
                 <h:form id="form1">                  
                     <p:dataTable value="#{frmModeloParte.listaModelo}" var="v" paginator="true" rowsPerPageTemplate="5,10,15" 
-                     paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-                     rows="10" lazy="true" id="dtModelo" selectionMode="single" rowKey="#{v.idModelo}"
+                                 paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                                 rows="10" lazy="true" id="dtModelo" selectionMode="single" rowKey="#{v.idModelo}"
                                  >
                         <f:facet name="header">
                             MODELO
@@ -40,11 +40,69 @@
             </ui:define>
 
             <ui:define name="content">
-                content
+                <h:form id="form2">
+                    <p:tabView>
+                        <p:tab title="GENERALIDADES">
+                            <p:panel>
+                                <p:panelGrid columns="2" id="pgGeneralidades">
+                                    <h:outputLabel value="ID"/>
+                                    <p:inputText id="idId" value="#{frmModeloParte.modelo.idModelo}"/>
+                                    <h:outputLabel value="Tipo de Vehiculo"/>
+                                    <p:selectOneMenu value="#{frmModeloParte.tipoVehiculo.idTipoVehiculo}">
+                                        <f:selectItems value="#{frmModelo.listaTipoVehiculo}" var="c" itemLabel="#{c.nombre}"
+                                                       itemValue="#{c.idTipoVehiculo}"/>
+                                    </p:selectOneMenu>
+                                    <h:outputLabel value="Marca"/>
+                                    <p:selectOneMenu value="#{frmModeloParte.marca.idMarca}">
+                                        <f:selectItems value="#{frmModelo.listaMarca}" var="e" itemLabel="#{e.nombre}"
+                                                       itemValue="#{e.idMarca}"/>
+                                    </p:selectOneMenu>
+                                    <h:outputLabel value="Nombre"/>
+                                    <p:inputText id="idNombre" value="#{frmModeloParte.modelo.nombre}"/>
+                                    <h:outputLabel value="Año"/>
+                                    <p:inputText id="idAño" value="#{frmModeloParte.modelo.anio}"/>
+                                </p:panelGrid>
+                            </p:panel>
+                            <p:commandButton value="GUARDAR"/>
+                        </p:tab>
+
+                        <p:tab title="PARTES">
+
+                            <p:dataTable value="#{frmModeloParte.listaPartes}" var="v" paginator="true" rowsPerPageTemplate="5,10,15" 
+                                         paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                                         rows="10" lazy="true" id="dtParte" selectionMode="single" rowKey="#{v.idParte}"
+                                         >
+                                <f:facet name="header">
+                                    PARTES PARA EL MODELO
+                                </f:facet>
+                                <p:column headerText="PARTE">
+                                    <h:outputText value="#{v.nombre}" /> 
+                                </p:column>
+                                <p:column headerText="ESTADO">
+                                    <h:outputText value="#{v.activo}" /> 
+                                </p:column>                        
+                            </p:dataTable> 
+                            <p:commandButton value="nuevo" action="#{frmModelo.crearNuevo()}"/>
+                            <p:panel>
+                                <p:panelGrid id="pgPartes" columns="2">
+                                    <h:outputLabel value="PARTE"/>
+                                    <p:commandButton value="SELECCIONAR PARTE" onclick="PF('diaSPartes').show();"/>
+                                </p:panelGrid>
+                            </p:panel>
+                        </p:tab>
+                    </p:tabView>
+                    <p:confirmDialog id="diaSPartes" widgetVar="diaSPartes" header="Seleccione una Parte">
+                        <p:panelGrid id="pgSeleccionarPartes" columns="2">
+                            <h:outputText value="Buscar Parte por Nombre"/>
+                            <p:autoComplete />
+                            <p:commandButton value="CERRAR" oncomplete="PF('diaSPartes').hide();"/>
+                        </p:panelGrid>
+                    </p:confirmDialog>
+                </h:form>
             </ui:define>
 
             <ui:define name="bottom">
-                bottom
+                Todos los Derechos Reservados
             </ui:define>
 
         </ui:composition>
