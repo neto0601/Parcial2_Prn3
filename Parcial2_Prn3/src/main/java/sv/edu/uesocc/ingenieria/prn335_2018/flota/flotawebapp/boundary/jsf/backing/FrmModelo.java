@@ -69,7 +69,7 @@ public class FrmModelo extends AbstractFrmDataModel<Modelo> implements Serializa
         return null;
     }
 
-    @Override
+/*    @Override
     public Modelo datosPorClave(String rowkey) {
         if (rowkey != null && !rowkey.trim().isEmpty()) {
             try {
@@ -79,7 +79,7 @@ public class FrmModelo extends AbstractFrmDataModel<Modelo> implements Serializa
             }
         }
         return null;
-    }
+    }*/
 
     @Override
     public AbstractFacade getFacade() {

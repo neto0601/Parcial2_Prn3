@@ -19,11 +19,13 @@ import sv.edu.uesocc.ingenieria.prn335_2018.flota.flotawebapp.control.AbstractFa
  */
 public abstract class AbstractFrmDataModel<T> {
     
-    public Modelo registro;       
+    protected Modelo registro;       
     
-    List<T> lista;
+    protected List<T> lista;
     
-    boolean Visible = false;
+    protected boolean Visible = false;
+    
+    protected LazyDataModel<T> lazyModel;
     
     public void inicializar(){
         
@@ -31,7 +33,7 @@ public abstract class AbstractFrmDataModel<T> {
     
     public abstract Object clavePorDatos(T object);
     
-    public abstract T datosPorClave(String rowkey);
+    //public abstract T datosPorClave(String rowkey);
     
     public void crearNuevo(){
         this.Visible = true;
@@ -48,7 +50,7 @@ public abstract class AbstractFrmDataModel<T> {
     }
     
     public LazyDataModel<T> getModelo(){
-      return null;
+      return lazyModel;
     }
     
     public abstract AbstractFacade getFacade();
