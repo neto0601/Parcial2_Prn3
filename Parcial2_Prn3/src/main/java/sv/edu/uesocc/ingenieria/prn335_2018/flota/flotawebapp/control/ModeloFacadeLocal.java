@@ -14,7 +14,7 @@ import sv.edu.uesocc.ingenieria.prn335_2018.flota.datos.definicion.Modelo;
  * @author neto
  */
 @Local
-public interface ModeloFacadeLocal {
+public interface ModeloFacadeLocal<T> {
 
     void create(Modelo modelo);
 
