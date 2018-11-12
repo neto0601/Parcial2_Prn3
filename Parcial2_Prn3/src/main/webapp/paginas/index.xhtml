@@ -14,11 +14,12 @@
                 <h:form id="form1">                  
                     <p:dataTable value="#{frmModeloParte.listaModelo}" var="v" paginator="true" rowsPerPageTemplate="5,10,15" 
                                  paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-                                 rows="10" lazy="true" id="dtModelo" selectionMode="single" rowKey="#{v.idModelo}"
+                                 rows="10" id="dtModelo" selectionMode="single" rowKey="#{v.idModelo}"
                                  >
                         <f:facet name="header">
                             MODELO
                         </f:facet>
+                        <p:ajax event="rowSelect" listener="#{frmModeloParte.seleccionarRegistro}" update="dtModelo"/>
                         <p:column headerText="ID">
                             <h:outputText value="#{v.idModelo}" /> 
                         </p:column>
@@ -35,11 +36,12 @@
                             <h:outputText value="#{v.anio}" /> 
                         </p:column>                        
                     </p:dataTable> 
-                    <p:commandButton value="nuevo" action="#{frmModelo.crearNuevo()}"/>
-                </h:form>
-            </ui:define>
+                    <p:commandButton value="NUEVO" actionListener="#{frmModelo.crearNuevo()}"/>
 
+                </h:form>
+            </ui:define> 
             <ui:define name="content">
+
                 <h:form id="form2">
                     <p:tabView id="tabPartes">
                         <p:tab title="GENERALIDADES">
@@ -48,12 +50,12 @@
                                     <h:outputLabel value="ID"/>
                                     <p:inputText id="idId" disabled="true"/>
                                     <h:outputLabel value="Tipo de Vehiculo"/>
-                                    <p:selectOneMenu value="#{frmModeloParte.modelo.idTipoVehiculo}">
+                                    <p:selectOneMenu value="#{frmModeloParte.tipoVehiculo.idTipoVehiculo}">
                                         <f:selectItems value="#{frmModelo.listaTipoVehiculo}" var="c" itemLabel="#{c.nombre}"
                                                        itemValue="#{c.idTipoVehiculo}"/>
                                     </p:selectOneMenu>
                                     <h:outputLabel value="Marca"/>
-                                    <p:selectOneMenu value="#{frmModeloParte.modelo.idMarca}">
+                                    <p:selectOneMenu value="#{frmModeloParte.marca.idMarca}">
                                         <f:selectItems value="#{frmModelo.listaMarca}" var="e" itemLabel="#{e.nombre}"
                                                        itemValue="#{e.idMarca}"/>
                                     </p:selectOneMenu>
@@ -63,7 +65,8 @@
                                     <p:inputText id="idAño" value="#{frmModeloParte.modelo.anio}"/>
                                 </p:panelGrid>
                             </p:panel>
-                            <p:commandButton value="GUARDAR" action="#{frmModeloParte.guardar}"/>
+                            <p:commandButton value="GUARDAR" actionListener="#{frmModeloParte.guardar}"/>
+
                         </p:tab>
 
                         <p:tab title="PARTES">
@@ -75,6 +78,7 @@
                                 <f:facet name="header">
                                     <h:outputText value="PARTE PARA EL MODELO #{frmModeloParte.modelo.nombre}"/>
                                 </f:facet>
+
                                 <p:column headerText="PARTE">
                                     <h:outputText value="#{v.idParte.nombre}" /> 
                                 </p:column>
@@ -94,6 +98,7 @@
                             </p:panel>
                         </p:tab>
                     </p:tabView>
+                    
                     <p:confirmDialog id="diaSPartes" widgetVar="diaSPartes" header="Seleccione una Parte">
                         <p:panelGrid id="pgSeleccionarPartes" columns="2">
                             <h:outputText value="Buscar Parte por Nombre"/>

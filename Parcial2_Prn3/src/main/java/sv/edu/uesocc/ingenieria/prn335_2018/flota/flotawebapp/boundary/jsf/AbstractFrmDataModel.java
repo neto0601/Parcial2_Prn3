@@ -23,7 +23,7 @@ public abstract class AbstractFrmDataModel<T> {
     
     protected List<T> lista;
     
-    protected boolean Visible = false;
+    protected boolean Visible;
     
     protected LazyDataModel<T> lazyModel;
     

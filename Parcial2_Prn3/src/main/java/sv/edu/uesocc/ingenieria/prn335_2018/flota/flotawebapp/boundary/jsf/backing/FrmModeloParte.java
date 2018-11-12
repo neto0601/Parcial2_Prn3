@@ -13,16 +13,19 @@ import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import org.primefaces.event.SelectEvent;
 import sv.edu.uesocc.ingenieria.prn335_2018.flota.datos.definicion.Marca;
 import sv.edu.uesocc.ingenieria.prn335_2018.flota.datos.definicion.Modelo;
 import sv.edu.uesocc.ingenieria.prn335_2018.flota.datos.definicion.ModeloParte;
 import sv.edu.uesocc.ingenieria.prn335_2018.flota.datos.definicion.Parte;
 import sv.edu.uesocc.ingenieria.prn335_2018.flota.datos.definicion.TipoParte;
 import sv.edu.uesocc.ingenieria.prn335_2018.flota.datos.definicion.TipoVehiculo;
+import sv.edu.uesocc.ingenieria.prn335_2018.flota.flotawebapp.control.MarcaFacade;
 import sv.edu.uesocc.ingenieria.prn335_2018.flota.flotawebapp.control.ModeloFacade;
 import sv.edu.uesocc.ingenieria.prn335_2018.flota.flotawebapp.control.ModeloParteFacade;
 import sv.edu.uesocc.ingenieria.prn335_2018.flota.flotawebapp.control.ParteFacade;
 import sv.edu.uesocc.ingenieria.prn335_2018.flota.flotawebapp.control.TipoParteFacade;
+import sv.edu.uesocc.ingenieria.prn335_2018.flota.flotawebapp.control.TipoVehiculoFacade;
 
 /**
  *
@@ -40,8 +43,13 @@ public class FrmModeloParte implements Serializable {
     private TipoParteFacade tipoParteFacade;
     @Inject
     private ModeloParteFacade modeloParteFacade;
+    @Inject 
+    TipoVehiculoFacade tipoVehiculoFacade;
+    @Inject
+    MarcaFacade marcaFacade;        
 
     Modelo modelo;
+    Modelo modelo2;
     TipoVehiculo tipoVehiculo;
     Marca marca;
     Parte parte;
@@ -79,17 +87,39 @@ public class FrmModeloParte implements Serializable {
         modelo = new Modelo();
         tipoVehiculo = new TipoVehiculo();
         marca = new Marca();
+        modelo2 = new Modelo();
         this.crearTablaModelo();
         this.crearTablaModeloParte();
     }
     
     public void guardar(){
         if (modelo != null) {
+            modelo.setIdTipoVehiculo(tipoVehiculoFacade.find(tipoVehiculo.getIdTipoVehiculo()));
+            modelo.setIdMarca(marcaFacade.find(marca.getIdMarca()));
             modeloFacade.create(modelo);
             this.crearTablaModelo();
         } else {
             throw new IllegalStateException();
         }  
+    }
+    
+    public void seleccionarRegistro(SelectEvent event){       
+        modelo2 = (Modelo)event.getObject();
+        actualizar();
+        
+    }
+    
+    public void actualizar(){
+        if(modelo2 != null){
+            setModelo(modelo2);
+        }
+        
+    }
+    
+    public void resetFail(){
+        modelo.setNombre(null);
+        modelo.setAnio(null);
+        
     }
 
     public List<Modelo> crearTablaModelo() {
@@ -157,4 +187,8 @@ public class FrmModeloParte implements Serializable {
     }
 
 //<p:ajax event="tabChange" listener="#{frmModelo.tabChangeHandler}"/>
+    //</h:form> 39
+    //</ui:define> 40
+    //<ui:define name="content"> 42
+    //<h:form id="form2"> 43
 }
