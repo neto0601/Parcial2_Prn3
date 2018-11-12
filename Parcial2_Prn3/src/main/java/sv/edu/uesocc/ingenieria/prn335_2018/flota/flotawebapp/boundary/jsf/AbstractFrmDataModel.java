@@ -28,7 +28,7 @@ public abstract class AbstractFrmDataModel<T> {
     protected LazyDataModel<T> lazyModel;
     
     public void inicializar(){
-        
+        registro = new Modelo();
     }
     
     public abstract Object clavePorDatos(T object);
@@ -56,4 +56,4 @@ public abstract class AbstractFrmDataModel<T> {
     public abstract AbstractFacade getFacade();
     
    
-    }
+}

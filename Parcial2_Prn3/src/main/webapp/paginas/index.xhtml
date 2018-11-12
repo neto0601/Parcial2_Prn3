@@ -46,14 +46,14 @@
                             <p:panel>
                                 <p:panelGrid columns="2" id="pgGeneralidades">
                                     <h:outputLabel value="ID"/>
-                                    <p:inputText id="idId" value="#{frmModeloParte.modelo.idModelo}"/>
+                                    <p:inputText id="idId" disabled="true"/>
                                     <h:outputLabel value="Tipo de Vehiculo"/>
-                                    <p:selectOneMenu value="#{frmModeloParte.tipoVehiculo.idTipoVehiculo}">
+                                    <p:selectOneMenu value="#{frmModeloParte.modelo.idTipoVehiculo}">
                                         <f:selectItems value="#{frmModelo.listaTipoVehiculo}" var="c" itemLabel="#{c.nombre}"
                                                        itemValue="#{c.idTipoVehiculo}"/>
                                     </p:selectOneMenu>
                                     <h:outputLabel value="Marca"/>
-                                    <p:selectOneMenu value="#{frmModeloParte.marca.idMarca}">
+                                    <p:selectOneMenu value="#{frmModeloParte.modelo.idMarca}">
                                         <f:selectItems value="#{frmModelo.listaMarca}" var="e" itemLabel="#{e.nombre}"
                                                        itemValue="#{e.idMarca}"/>
                                     </p:selectOneMenu>
@@ -63,20 +63,20 @@
                                     <p:inputText id="idAño" value="#{frmModeloParte.modelo.anio}"/>
                                 </p:panelGrid>
                             </p:panel>
-                            <p:commandButton value="GUARDAR"/>
+                            <p:commandButton value="GUARDAR" action="#{frmModeloParte.guardar}"/>
                         </p:tab>
 
                         <p:tab title="PARTES">
 
-                            <p:dataTable value="#{frmModeloParte.listaPartes}" var="v" paginator="true" rowsPerPageTemplate="5,10,15" 
+                            <p:dataTable value="#{frmModeloParte.listaModeloParte}" var="v" paginator="true" rowsPerPageTemplate="5,10,15" 
                                          paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-                                         rows="10" lazy="true" id="dtParte" selectionMode="single" rowKey="#{v.idParte}"
+                                         rows="10" lazy="true" id="dtParte" selectionMode="single" rowKey="#{v.idModeloParte}"
                                          >
                                 <f:facet name="header">
-                                    PARTES PARA EL MODELO
+                                    <h:outputText value="PARTE PARA EL MODELO #{frmModeloParte.modelo.nombre}"/>
                                 </f:facet>
                                 <p:column headerText="PARTE">
-                                    <h:outputText value="#{v.nombre}" /> 
+                                    <h:outputText value="#{v.idParte.nombre}" /> 
                                 </p:column>
                                 <p:column headerText="ESTADO">
                                     <h:outputText value="#{v.activo}" /> 
@@ -87,6 +87,9 @@
                                 <p:panelGrid id="pgPartes" columns="2">
                                     <h:outputLabel value="PARTE"/>
                                     <p:commandButton value="SELECCIONAR PARTE" onclick="PF('diaSPartes').show();"/>
+                                    <h:outputLabel value="Activo"/>
+                                    <p:selectBooleanCheckbox value="#{frmModeloParte.value1}" />
+                                    <p:commandButton value="GUARDAR"/>
                                 </p:panelGrid>
                             </p:panel>
                         </p:tab>
