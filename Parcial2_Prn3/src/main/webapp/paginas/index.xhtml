@@ -11,7 +11,9 @@
         <ui:composition template="./../templates/Template.xhtml">
 
             <ui:define name="top">
-                <h:form id="form1">                  
+                <h:form id="form1">         
+                    <h4>Ernesto Alonso Magaña Palacios        MP15029</h4>
+                    <h4>Ricardo Alfredo Valencia Hernández   VH15010</h4>
                     <p:dataTable value="#{frmModeloParte.listaModelo}" var="v" paginator="true" rowsPerPageTemplate="5,10,15" 
                                  paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
                                  rows="10" id="dtModelo" selectionMode="single" rowKey="#{v.idModelo}"
@@ -36,14 +38,17 @@
                             <h:outputText value="#{v.anio}" /> 
                         </p:column>                        
                     </p:dataTable> 
-                    <p:commandButton value="NUEVO" actionListener="#{frmModelo.crearNuevo()}"/>
+                    <p:commandButton value="NUEVO" actionListener="#{frmModelo.crearNuevo()}" />
 
                 </h:form>
             </ui:define> 
             <ui:define name="content">
 
                 <h:form id="form2">
-                    <p:tabView id="tabPartes">
+                    
+                    
+                   
+                    <p:tabView id="tabPartes"  >
                         <p:tab title="GENERALIDADES">
                             <p:panel>
                                 <p:panelGrid columns="2" id="pgGeneralidades">
@@ -98,6 +103,8 @@
                             </p:panel>
                         </p:tab>
                     </p:tabView>
+                    
+                    
                     
                     <p:confirmDialog id="diaSPartes" widgetVar="diaSPartes" header="Seleccione una Parte">
                         <p:panelGrid id="pgSeleccionarPartes" columns="2">
